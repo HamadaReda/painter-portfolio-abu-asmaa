@@ -5,13 +5,14 @@ import { HomePage, type HomePageData } from '../pages/HomePage'
 import { NotFoundPage } from '../pages/NotFoundPage'
 
 async function loadHomePage(): Promise<HomePageData> {
-  const [siteInfo, services, projects] = await Promise.all([
+  const [siteInfo, homePageContent, services, projects] = await Promise.all([
     contentRepository.getSiteInfo(),
+    contentRepository.getHomePageContent(),
     contentRepository.getServices(),
     contentRepository.getProjects(),
   ])
 
-  return { siteInfo, services, projects }
+  return { siteInfo, homePageContent, services, projects }
 }
 
 export const router = createBrowserRouter([
