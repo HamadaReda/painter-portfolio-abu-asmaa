@@ -1,5 +1,11 @@
 import { siteConfig } from '../config/site'
-import type { HomePageContent, Project, Service, SiteInfo } from '../domain/models'
+import type {
+  AboutPageContent,
+  HomePageContent,
+  Project,
+  Service,
+  SiteInfo,
+} from '../domain/models'
 import interiorPaintingImage from '../assets/images/painting-hero-1440.jpg'
 import commercialPaintingImage from '../assets/images/services/commercial-painting.jpg'
 import decorativeFinishingImage from '../assets/images/services/decorative-finishing.jpg'
@@ -141,6 +147,17 @@ export const services: Service[] = [
 
 // Real project entries will be added only after verified project details are available.
 export const projects: Project[] = []
+
+export const aboutPageContent: AboutPageContent = {
+  introduction:
+    'معلم دهانات بوية أبو أسماء يقدم خدمات الدهانات للمنازل والفلل والمباني والمواقع التجارية في المدينة المنورة، مع تواصل مباشر لمناقشة طبيعة الموقع ونطاق العمل المطلوب.',
+  workPhilosophy: [
+    'فهم احتياج العميل وطبيعة المساحة قبل تحديد نطاق العمل.',
+    'مناقشة الألوان والتجهيزات والخطوات المرتبطة بحالة الموقع.',
+    'توضيح الأعمال المتفق عليها قبل بدء التنفيذ.',
+  ],
+  serviceAreas: ['المدينة المنورة'],
+}
 
 export const homePageContent: HomePageContent = {
   hero: {

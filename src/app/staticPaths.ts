@@ -10,6 +10,7 @@ export async function getStaticPaths() {
     '/',
     '/services',
     '/projects',
+    '/about',
     ...services.map((service) => `/services/${service.slug}`),
     ...projects.map((project) => `/projects/${project.slug}`),
   ]
