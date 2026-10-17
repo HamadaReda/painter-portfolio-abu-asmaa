@@ -19,6 +19,10 @@ export class StaticContentRepository implements ContentRepository {
     return services
   }
 
+  async getServiceBySlug(slug: string) {
+    return services.find((service) => service.slug === slug) ?? null
+  }
+
   async getProjects() {
     return projects
   }
