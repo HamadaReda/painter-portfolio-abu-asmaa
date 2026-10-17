@@ -9,6 +9,7 @@ import { ProjectsPage, type ProjectsPageData } from '../pages/ProjectsPage'
 import { ProjectDetailPage, type ProjectDetailPageData } from '../pages/ProjectDetailPage'
 import { PageLoading } from '../shared/ui'
 import { AboutPage, type AboutPageData } from '../pages/AboutPage'
+import { ContactPage, type ContactPageData } from '../pages/ContactPage'
 
 async function loadHomePage(): Promise<HomePageData> {
   const [siteInfo, homePageContent, services, projects] = await Promise.all([
@@ -47,6 +48,15 @@ async function loadAboutPage(): Promise<AboutPageData> {
   ])
 
   return { content, services, siteInfo }
+}
+
+async function loadContactPage(): Promise<ContactPageData> {
+  const [services, siteInfo] = await Promise.all([
+    contentRepository.getServices(),
+    contentRepository.getSiteInfo(),
+  ])
+
+  return { services, siteInfo }
 }
 
 async function loadProjectDetail({
@@ -145,6 +155,11 @@ export const router = createBrowserRouter([
         path: 'about',
         loader: loadAboutPage,
         element: <AboutPage />,
+      },
+      {
+        path: 'contact',
+        loader: loadContactPage,
+        element: <ContactPage />,
       },
       {
         path: '*',
