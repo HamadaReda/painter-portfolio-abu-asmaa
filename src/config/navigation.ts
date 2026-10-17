@@ -1,5 +1,3 @@
-import { siteConfig } from './site'
-
 export interface NavigationItem {
   label: string
   href: string
@@ -8,9 +6,7 @@ export interface NavigationItem {
 
 export const publicNavigation: readonly NavigationItem[] = [
   { label: 'الرئيسية', href: '/' },
-  {
-    label: 'اتصل بنا',
-    href: `tel:${siteConfig.contact.phone}`,
-    external: true,
-  },
+  { label: 'الخدمات', href: '/#services' },
+  { label: 'المشروعات', href: '/#projects' },
+  { label: 'تواصل معنا', href: '/#contact' },
 ]

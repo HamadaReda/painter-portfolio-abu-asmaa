@@ -43,7 +43,7 @@ export function Header() {
             <ul className="flex items-center gap-1">
               {publicNavigation.map((item) => (
                 <li key={item.href}>
-                  {item.external ? (
+                  {item.external || item.href.includes('#') ? (
                     <a className={navLinkClassName} href={item.href}>
                       {item.label}
                     </a>
@@ -95,7 +95,7 @@ export function Header() {
             <ul className="grid gap-1">
               {publicNavigation.map((item) => (
                 <li key={item.href}>
-                  {item.external ? (
+                  {item.external || item.href.includes('#') ? (
                     <a
                       className={`${navLinkClassName} block`}
                       href={item.href}

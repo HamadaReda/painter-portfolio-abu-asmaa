@@ -33,7 +33,7 @@ export function Footer() {
           <ul className="mt-4 grid gap-3">
             {publicNavigation.map((item) => (
               <li key={item.href}>
-                {item.external ? (
+                {item.external || item.href.includes('#') ? (
                   <a className={footerLinkClassName} href={item.href}>
                     {item.label}
                   </a>
