@@ -1,44 +1,54 @@
 import { Images } from 'lucide-react'
-import type { Project } from '../../../domain/models'
-import { ProjectCard } from '../../projects/components/ProjectCard'
+import type { WorkGalleryImage } from '../../../domain/models'
 import { Button, Container, SectionHeading } from '../../../shared/ui'
 
 interface FeaturedProjectsProps {
-  projects: readonly Project[]
+  images: readonly WorkGalleryImage[]
 }
 
-export function FeaturedProjects({ projects }: FeaturedProjectsProps) {
-  const featuredProjects = projects.filter((project) => project.featured)
+export function FeaturedProjects({ images }: FeaturedProjectsProps) {
+  const featuredImages = images.filter((image) => image.featured).slice(0, 6)
 
   return (
     <section aria-labelledby="projects-title" className="bg-charcoal-900 py-section text-white" id="projects">
       <Container>
         <SectionHeading
-          description="لن نعرض صورًا أو تفاصيل أعمال قبل توثيقها والتحقق من معلوماتها."
-          eyebrow="نماذج الأعمال"
+          description="لقطات حقيقية مقدمة من صاحب النشاط لأعمال دهانات وتشطيبات متنوعة."
+          eyebrow="من أرض الواقع"
           id="projects-title"
-          title="مشروعات مختارة"
+          title="صور مختارة من الأعمال"
           tone="dark"
         />
 
-        {featuredProjects.length > 0 ? (
-          <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-            {featuredProjects.map((project) => (
-              <ProjectCard key={project.id} project={project} />
-            ))}
-            <div className="md:col-span-2 lg:col-span-3">
-              <Button to="/projects" variant="secondary">عرض كل المشروعات</Button>
+        {featuredImages.length > 0 ? (
+          <>
+            <div className="mt-10 grid auto-rows-[14rem] gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {featuredImages.map((image, index) => (
+                <figure
+                  className={`group relative overflow-hidden rounded-brand-lg bg-charcoal-800 ${index === 0 ? 'sm:col-span-2 sm:row-span-2' : ''}`}
+                  key={image.id}
+                >
+                  <img
+                    alt={image.alt}
+                    className="size-full object-cover transition duration-300 group-hover:scale-[1.025]"
+                    decoding="async"
+                    height={image.height}
+                    loading="lazy"
+                    src={image.src}
+                    width={image.width}
+                  />
+                  <span className="absolute inset-0 bg-gradient-to-t from-charcoal-900/45 via-transparent to-transparent" />
+                </figure>
+              ))}
             </div>
-          </div>
+            <Button className="mt-8 border-ivory-200 text-white hover:bg-white/10" to="/projects" variant="secondary">
+              شاهد معرض الأعمال كاملًا
+            </Button>
+          </>
         ) : (
           <div className="mt-10 flex max-w-2xl items-start gap-4 rounded-brand-lg border border-white/10 bg-white/5 p-6">
             <Images aria-hidden="true" className="mt-1 size-6 shrink-0 text-bronze-300" />
-            <div>
-              <h3 className="font-bold">لا توجد مشروعات موثقة معروضة حاليًا</h3>
-              <p className="mt-2 text-sm leading-7 text-ivory-200">
-                ستُضاف نماذج الأعمال هنا بعد توفر صور ومعلومات حقيقية معتمدة.
-              </p>
-            </div>
+            <p className="text-sm leading-7 text-ivory-200">سيتم عرض صور الأعمال هنا عند توفرها.</p>
           </div>
         )}
       </Container>

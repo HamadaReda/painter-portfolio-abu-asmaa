@@ -5,6 +5,7 @@ import type {
   Project,
   Service,
   SiteInfo,
+  WorkGalleryImage,
 } from '../domain/models'
 import interiorPaintingImage from '../assets/images/painting-hero-1440.jpg'
 import commercialPaintingImage from '../assets/images/services/commercial-painting.jpg'
@@ -147,6 +148,45 @@ export const services: Service[] = [
 
 // Real project entries will be added only after verified project details are available.
 export const projects: Project[] = []
+
+export const workGalleryImages: WorkGalleryImage[] = [
+  { id: 'work-0016', src: '/project-gallery/IMG-20261017-WA0016.jpg', alt: 'تشطيبات دهانات داخلية مع تفاصيل سقف ديكورية', width: 750, height: 1000, featured: true },
+  { id: 'work-0017', src: '/project-gallery/IMG-20261017-WA0017.jpg', alt: 'تنسيق الدهانات والتفاصيل الديكورية في مساحة داخلية', width: 750, height: 1000 },
+  { id: 'work-0018', src: '/project-gallery/IMG-20261017-WA0018.jpg', alt: 'سقف داخلي بتفاصيل إضاءة وتشطيبات دهان', width: 750, height: 1000, featured: true },
+  { id: 'work-0019', src: '/project-uploads/IMG-20261017-WA0019.jpg', alt: 'تنفيذ تشطيب دهان ديكوري بلون دافئ', width: 750, height: 1000, featured: true },
+  { id: 'work-0020', src: '/project-uploads/IMG-20261017-WA0020.jpg', alt: 'تفاصيل ملمس دهان ديكوري على الجدار', width: 748, height: 748 },
+  { id: 'work-0021', src: '/project-uploads/IMG-20261017-WA0021.jpg', alt: 'تفاصيل زخرفية ضمن أعمال التشطيب الداخلي', width: 750, height: 1000, featured: true },
+  { id: 'work-0022', src: '/project-uploads/IMG-20261017-WA0022.jpg', alt: 'مساحة داخلية بتشطيبات دهان وسقف ديكوري', width: 750, height: 1000 },
+  { id: 'work-0023', src: '/project-uploads/IMG-20261017-WA0023.jpg', alt: 'تجهيز موقع داخلي أثناء أعمال الدهانات', width: 750, height: 1000 },
+  { id: 'work-0024', src: '/project-uploads/IMG-20261017-WA0024.jpg', alt: 'تنفيذ دقيق لدهان جدار داخلي', width: 750, height: 1000 },
+  { id: 'work-0025', src: '/project-uploads/IMG-20261017-WA0025.jpg', alt: 'أعمال تشطيب دهان في مساحة مرتفعة', width: 720, height: 1280 },
+  { id: 'work-0026', src: '/project-uploads/IMG-20261017-WA0026.jpg', alt: 'تفاصيل تشطيبات داخلية وألواح ديكورية', width: 720, height: 1280 },
+  { id: 'work-0027', src: '/project-uploads/IMG-20261017-WA0027.jpg', alt: 'تطبيق طبقات التشطيب على جدار داخلي', width: 750, height: 1000 },
+  { id: 'work-0028', src: '/project-uploads/IMG-20261017-WA0028.jpg', alt: 'تشطيب جوانب ومدخل داخلي بالألوان المتناسقة', width: 720, height: 1280 },
+  { id: 'work-0029', src: '/project-uploads/IMG-20261017-WA0029.jpg', alt: 'تنفيذ الدهانات على تفاصيل داخلية رأسية', width: 720, height: 1280 },
+  { id: 'work-0030', src: '/project-uploads/IMG-20261017-WA0030.jpg', alt: 'أعمال دهان للجزء العلوي من جدار داخلي', width: 720, height: 1280 },
+  { id: 'work-0031', src: '/project-uploads/IMG-20261017-WA0031.jpg', alt: 'تنسيق سقف وإضاءة ضمن تشطيبات داخلية', width: 720, height: 1280, featured: true },
+  { id: 'work-0032', src: '/project-uploads/IMG-20261017-WA0032.jpg', alt: 'تطبيق تشطيب ديكوري على مساحة جدارية', width: 960, height: 1280 },
+  { id: 'work-0033', src: '/project-uploads/IMG-20261017-WA0033.jpg', alt: 'تفاصيل ألوان وتشطيبات في مساحة داخلية', width: 720, height: 1280 },
+  { id: 'work-0034', src: '/project-uploads/IMG-20261017-WA0034.jpg', alt: 'تشطيب إطار باب ضمن أعمال الدهانات الداخلية', width: 720, height: 1280 },
+  { id: 'work-0035', src: '/project-uploads/IMG-20261017-WA0035.jpg', alt: 'دهان علامات أرضية وحواف خارجية', width: 720, height: 1280 },
+  { id: 'work-0036', src: '/project-uploads/IMG-20261017-WA0036.jpg', alt: 'أعمال دهان داخلية أثناء التنفيذ', width: 720, height: 1280 },
+  { id: 'work-0037', src: '/project-uploads/IMG-20261017-WA0037.jpg', alt: 'مساحة داخلية مجهزة خلال مراحل الدهان', width: 750, height: 1000 },
+  { id: 'work-0038', src: '/project-uploads/IMG-20261017-WA0038.jpg', alt: 'تنفيذ دهانات في مساحة خارجية', width: 720, height: 1280 },
+  { id: 'work-0039', src: '/project-uploads/IMG-20261017-WA0039.jpg', alt: 'دهان حواف وعلامات تنظيمية خارجية', width: 720, height: 1280 },
+  { id: 'work-0040', src: '/project-uploads/IMG-20261017-WA0040.jpg', alt: 'تطبيق الدهان على جدار داخلي', width: 720, height: 1280 },
+  { id: 'work-0041', src: '/project-uploads/IMG-20261017-WA0041.jpg', alt: 'تفاصيل تشطيب وألوان داخل مساحة مجهزة', width: 720, height: 1280 },
+  { id: 'work-0042', src: '/project-uploads/IMG-20261017-WA0042.jpg', alt: 'تنفيذ ملمس دهان ديكوري على الجدار', width: 720, height: 1280 },
+  { id: 'work-0043', src: '/project-uploads/IMG-20261017-WA0043.jpg', alt: 'ألواح وتفاصيل تشطيب داخلي متناسقة', width: 1280, height: 720, featured: true },
+  { id: 'work-0044', src: '/project-uploads/IMG-20261017-WA0044.jpg', alt: 'أعمال تشطيب جدار ديكوري أثناء التنفيذ', width: 720, height: 1280 },
+  { id: 'work-0045', src: '/project-uploads/IMG-20261017-WA0045.jpg', alt: 'دهان وتشطيب إطار باب داخلي', width: 720, height: 1280 },
+  { id: 'work-0046', src: '/project-uploads/IMG-20261017-WA0046.jpg', alt: 'تفاصيل تنفيذ دهان ديكوري داخلي', width: 720, height: 1280 },
+  { id: 'work-0047', src: '/project-uploads/IMG-20261017-WA0047.jpg', alt: 'تنفيذ علامات ودهانات أرضية خارجية', width: 750, height: 1000 },
+  { id: 'work-0048', src: '/project-uploads/IMG-20261017-WA0048.jpg', alt: 'تشطيب سقف داخلي حول وحدات الإضاءة', width: 720, height: 960 },
+  { id: 'work-0049', src: '/project-uploads/IMG-20261017-WA0049.jpg', alt: 'تشطيب دهان حول باب داخلي', width: 720, height: 1280 },
+  { id: 'work-0050', src: '/project-uploads/IMG-20261017-WA0050.jpg', alt: 'تنفيذ الدهانات في جزء مرتفع من المساحة', width: 960, height: 1280 },
+  { id: 'work-0051', src: '/project-uploads/IMG-20261017-WA0051.jpg', alt: 'تنسيق جدار ديكوري ومدخل داخلي', width: 720, height: 1280 },
+]
 
 export const aboutPageContent: AboutPageContent = {
   introduction:

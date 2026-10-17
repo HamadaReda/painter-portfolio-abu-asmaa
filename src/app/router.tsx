@@ -12,14 +12,15 @@ import { AboutPage, type AboutPageData } from '../pages/AboutPage'
 import { ContactPage, type ContactPageData } from '../pages/ContactPage'
 
 async function loadHomePage(): Promise<HomePageData> {
-  const [siteInfo, homePageContent, services, projects] = await Promise.all([
+  const [siteInfo, homePageContent, services, projects, galleryImages] = await Promise.all([
     contentRepository.getSiteInfo(),
     contentRepository.getHomePageContent(),
     contentRepository.getServices(),
     contentRepository.getProjects(),
+    contentRepository.getWorkGalleryImages(),
   ])
 
-  return { siteInfo, homePageContent, services, projects }
+  return { siteInfo, homePageContent, services, projects, galleryImages }
 }
 
 async function loadServicesPage(): Promise<ServicesPageData> {
@@ -32,12 +33,13 @@ async function loadServicesPage(): Promise<ServicesPageData> {
 }
 
 async function loadProjectsPage(): Promise<ProjectsPageData> {
-  const [projects, siteInfo] = await Promise.all([
+  const [projects, siteInfo, galleryImages] = await Promise.all([
     contentRepository.getProjects(),
     contentRepository.getSiteInfo(),
+    contentRepository.getWorkGalleryImages(),
   ])
 
-  return { projects, siteInfo }
+  return { projects, siteInfo, galleryImages }
 }
 
 async function loadAboutPage(): Promise<AboutPageData> {

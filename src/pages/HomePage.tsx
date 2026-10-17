@@ -1,5 +1,11 @@
 import { useLoaderData } from 'react-router-dom'
-import type { HomePageContent, Project, Service, SiteInfo } from '../domain/models'
+import type {
+  HomePageContent,
+  Project,
+  Service,
+  SiteInfo,
+  WorkGalleryImage,
+} from '../domain/models'
 import { FeaturedProjects } from '../features/home/components/FeaturedProjects'
 import { FinalCta } from '../features/home/components/FinalCta'
 import { HomeHero } from '../features/home/components/HomeHero'
@@ -13,10 +19,11 @@ export interface HomePageData {
   homePageContent: HomePageContent
   services: readonly Service[]
   projects: readonly Project[]
+  galleryImages: readonly WorkGalleryImage[]
 }
 
 export function HomePage() {
-  const { siteInfo, homePageContent, services, projects } =
+  const { siteInfo, homePageContent, services, galleryImages } =
     useLoaderData() as HomePageData
 
   return (
@@ -24,7 +31,7 @@ export function HomePage() {
       <HomeHero content={homePageContent.hero} siteInfo={siteInfo} />
       <ServicesPreview services={services} />
       <WhyChooseUs values={homePageContent.values} />
-      <FeaturedProjects projects={projects} />
+      <FeaturedProjects images={galleryImages} />
       <WorkProcess steps={homePageContent.process} />
       <ServiceArea areas={homePageContent.serviceAreas} />
       <FinalCta content={homePageContent.finalCta} siteInfo={siteInfo} />
