@@ -1,6 +1,7 @@
 import { Images } from 'lucide-react'
 import type { Project } from '../../../domain/models'
-import { Card, Container, SectionHeading } from '../../../shared/ui'
+import { ProjectCard } from '../../projects/components/ProjectCard'
+import { Button, Container, SectionHeading } from '../../../shared/ui'
 
 interface FeaturedProjectsProps {
   projects: readonly Project[]
@@ -23,22 +24,11 @@ export function FeaturedProjects({ projects }: FeaturedProjectsProps) {
         {featuredProjects.length > 0 ? (
           <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
             {featuredProjects.map((project) => (
-              <Card className="overflow-hidden p-0" key={project.id}>
-                {project.imageUrl ? (
-                  <img
-                    alt={project.title}
-                    className="aspect-[4/3] w-full object-cover"
-                    decoding="async"
-                    loading="lazy"
-                    src={project.imageUrl}
-                  />
-                ) : null}
-                <div className="p-6">
-                  <h3 className="text-lg font-bold">{project.title}</h3>
-                  <p className="mt-2 leading-7 text-charcoal-700">{project.description}</p>
-                </div>
-              </Card>
+              <ProjectCard key={project.id} project={project} />
             ))}
+            <div className="md:col-span-2 lg:col-span-3">
+              <Button to="/projects" variant="secondary">عرض كل المشروعات</Button>
+            </div>
           </div>
         ) : (
           <div className="mt-10 flex max-w-2xl items-start gap-4 rounded-brand-lg border border-white/10 bg-white/5 p-6">
