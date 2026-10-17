@@ -1,5 +1,5 @@
 import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
+import { createRoot, hydrateRoot } from 'react-dom/client'
 import '@fontsource/cairo/400.css'
 import '@fontsource/cairo/500.css'
 import '@fontsource/cairo/600.css'
@@ -13,8 +13,14 @@ if (!rootElement) {
   throw new Error('Root element was not found')
 }
 
-createRoot(rootElement).render(
+const application = (
   <StrictMode>
     <App />
-  </StrictMode>,
+  </StrictMode>
 )
+
+if (rootElement.hasChildNodes()) {
+  hydrateRoot(rootElement, application)
+} else {
+  createRoot(rootElement).render(application)
+}

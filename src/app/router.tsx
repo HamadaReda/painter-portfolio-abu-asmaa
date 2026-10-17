@@ -1,4 +1,8 @@
-import { createBrowserRouter, type LoaderFunctionArgs } from 'react-router-dom'
+import {
+  createBrowserRouter,
+  type LoaderFunctionArgs,
+  type RouteObject,
+} from 'react-router-dom'
 import { contentRepository } from '../repositories/content'
 import { PublicLayout } from '../shared/layouts/PublicLayout'
 import { HomePage, type HomePageData } from '../pages/HomePage'
@@ -6,7 +10,6 @@ import { NotFoundPage } from '../pages/NotFoundPage'
 import { ServiceDetailPage, type ServiceDetailPageData } from '../pages/ServiceDetailPage'
 import { ServicesPage, type ServicesPageData } from '../pages/ServicesPage'
 import { ProjectsPage, type ProjectsPageData } from '../pages/ProjectsPage'
-import { ProjectDetailPage, type ProjectDetailPageData } from '../pages/ProjectDetailPage'
 import { PageLoading } from '../shared/ui'
 import { AboutPage, type AboutPageData } from '../pages/AboutPage'
 import { ContactPage, type ContactPageData } from '../pages/ContactPage'
@@ -33,13 +36,12 @@ async function loadServicesPage(): Promise<ServicesPageData> {
 }
 
 async function loadProjectsPage(): Promise<ProjectsPageData> {
-  const [projects, siteInfo, galleryImages] = await Promise.all([
-    contentRepository.getProjects(),
+  const [siteInfo, galleryImages] = await Promise.all([
     contentRepository.getSiteInfo(),
     contentRepository.getWorkGalleryImages(),
   ])
 
-  return { projects, siteInfo, galleryImages }
+  return { siteInfo, galleryImages }
 }
 
 async function loadAboutPage(): Promise<AboutPageData> {
@@ -59,39 +61,6 @@ async function loadContactPage(): Promise<ContactPageData> {
   ])
 
   return { services, siteInfo }
-}
-
-async function loadProjectDetail({
-  params,
-}: LoaderFunctionArgs): Promise<ProjectDetailPageData> {
-  const slug = params.slug
-
-  if (!slug) {
-    throw new Response('Not Found', { status: 404 })
-  }
-
-  const [project, projects, services, siteInfo] = await Promise.all([
-    contentRepository.getProjectBySlug(slug),
-    contentRepository.getProjects(),
-    contentRepository.getServices(),
-    contentRepository.getSiteInfo(),
-  ])
-
-  if (!project) {
-    throw new Response('Not Found', { status: 404 })
-  }
-
-  const relatedService = project.relatedServiceSlug
-    ? services.find((service) => service.slug === project.relatedServiceSlug) ?? null
-    : null
-  const relatedProjects = projects
-    .filter(
-      (candidate) =>
-        candidate.id !== project.id && candidate.category === project.category,
-    )
-    .slice(0, 3)
-
-  return { project, relatedProjects, relatedService, siteInfo }
 }
 
 async function loadServiceDetail({
@@ -121,7 +90,7 @@ async function loadServiceDetail({
   return { service, relatedServices, siteInfo }
 }
 
-export const router = createBrowserRouter([
+export const routes: RouteObject[] = [
   {
     element: <PublicLayout />,
     hydrateFallbackElement: <PageLoading />,
@@ -148,12 +117,6 @@ export const router = createBrowserRouter([
         element: <ProjectsPage />,
       },
       {
-        path: 'projects/:slug',
-        loader: loadProjectDetail,
-        element: <ProjectDetailPage />,
-        errorElement: <NotFoundPage />,
-      },
-      {
         path: 'about',
         loader: loadAboutPage,
         element: <AboutPage />,
@@ -169,4 +132,10 @@ export const router = createBrowserRouter([
       },
     ],
   },
-])
+]
+
+export function createAppRouter() {
+  return createBrowserRouter(routes, {
+    hydrationData: window.__staticRouterHydrationData,
+  })
+}
