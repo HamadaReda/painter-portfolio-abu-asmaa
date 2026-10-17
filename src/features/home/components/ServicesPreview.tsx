@@ -1,5 +1,5 @@
 import type { Service } from '../../../domain/models'
-import { Container, SectionHeading } from '../../../shared/ui'
+import { Button, Container, SectionHeading } from '../../../shared/ui'
 import { ServiceCard } from './ServiceCard'
 
 interface ServicesPreviewProps {
@@ -7,6 +7,8 @@ interface ServicesPreviewProps {
 }
 
 export function ServicesPreview({ services }: ServicesPreviewProps) {
+  const previewServices = services.slice(0, 3)
+
   return (
     <section aria-labelledby="services-title" className="bg-surface py-section" id="services">
       <Container>
@@ -17,9 +19,9 @@ export function ServicesPreview({ services }: ServicesPreviewProps) {
           title="خدمات دهانات تناسب نوع مشروعك"
         />
 
-        {services.length > 0 ? (
+        {previewServices.length > 0 ? (
           <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-            {services.map((service) => (
+            {previewServices.map((service) => (
               <ServiceCard key={service.id} service={service} />
             ))}
           </div>
@@ -28,6 +30,12 @@ export function ServicesPreview({ services }: ServicesPreviewProps) {
             سيتم إضافة تفاصيل الخدمات قريبًا. يمكنك التواصل مباشرة لمناقشة العمل المطلوب.
           </p>
         )}
+
+        {services.length > previewServices.length ? (
+          <Button className="mt-8" to="/services" variant="secondary">
+            عرض جميع الخدمات
+          </Button>
+        ) : null}
       </Container>
     </section>
   )

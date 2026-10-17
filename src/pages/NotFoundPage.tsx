@@ -1,7 +1,14 @@
 import { ArrowRight } from 'lucide-react'
+import { siteConfig } from '../config/site'
+import { usePageMetadata } from '../shared/hooks/usePageMetadata'
 import { Button, Container } from '../shared/ui'
 
 export function NotFoundPage() {
+  usePageMetadata(
+    `الصفحة غير موجودة | ${siteConfig.businessName}`,
+    'تعذّر العثور على الصفحة المطلوبة.',
+  )
+
   return (
     <section aria-labelledby="not-found-title" className="flex w-full items-center py-section">
       <Container>
