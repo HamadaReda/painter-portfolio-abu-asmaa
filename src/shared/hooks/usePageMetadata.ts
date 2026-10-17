@@ -1,19 +1,19 @@
 import { useEffect } from 'react'
+import { useLocation } from 'react-router-dom'
+import { renderSeoHead } from '../../seo/head'
+import { getSeoMetadata } from '../../seo/metadata'
 
 export function usePageMetadata(title: string, description: string) {
+  const { pathname } = useLocation()
+
   useEffect(() => {
-    document.title = title
+    const metadata = { ...getSeoMetadata(pathname), description, title }
+    const range = document.createRange()
+    const fragment = range.createContextualFragment(renderSeoHead(metadata))
 
-    let descriptionElement = document.querySelector<HTMLMetaElement>(
-      'meta[name="description"]',
-    )
-
-    if (!descriptionElement) {
-      descriptionElement = document.createElement('meta')
-      descriptionElement.name = 'description'
-      document.head.append(descriptionElement)
-    }
-
-    descriptionElement.content = description
-  }, [description, title])
+    document.head.querySelectorAll('[data-seo="true"]').forEach((element) => {
+      element.remove()
+    })
+    document.head.append(fragment)
+  }, [description, pathname, title])
 }

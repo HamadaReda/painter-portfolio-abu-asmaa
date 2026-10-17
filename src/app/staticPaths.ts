@@ -1,10 +1,7 @@
 import { contentRepository } from '../repositories/content'
 
 export async function getStaticPaths() {
-  const [services, projects] = await Promise.all([
-    contentRepository.getServices(),
-    contentRepository.getProjects(),
-  ])
+  const services = await contentRepository.getServices()
 
   return [
     '/',
@@ -13,6 +10,5 @@ export async function getStaticPaths() {
     '/about',
     '/contact',
     ...services.map((service) => `/services/${service.slug}`),
-    ...projects.map((project) => `/projects/${project.slug}`),
   ]
 }

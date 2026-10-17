@@ -1,23 +1,21 @@
 import { Images } from 'lucide-react'
 import { useLoaderData } from 'react-router-dom'
-import type { Project, SiteInfo, WorkGalleryImage } from '../domain/models'
+import type { SiteInfo, WorkGalleryImage } from '../domain/models'
 import { ProjectsEmptyState } from '../features/projects/components/ProjectsEmptyState'
-import { ProjectsGallery } from '../features/projects/components/ProjectsGallery'
 import { RealWorkGallery } from '../features/projects/components/RealWorkGallery'
 import { usePageMetadata } from '../shared/hooks/usePageMetadata'
 import { Badge, Container } from '../shared/ui'
 
 export interface ProjectsPageData {
-  projects: readonly Project[]
   siteInfo: SiteInfo
   galleryImages: readonly WorkGalleryImage[]
 }
 
 export function ProjectsPage() {
-  const { galleryImages, projects, siteInfo } = useLoaderData() as ProjectsPageData
+  const { galleryImages, siteInfo } = useLoaderData() as ProjectsPageData
 
   usePageMetadata(
-    `مشروعات الدهانات في ${siteInfo.city} | ${siteInfo.businessName}`,
+    `معرض أعمال الدهانات في ${siteInfo.city} | ${siteInfo.businessName}`,
     `صور حقيقية من أعمال الدهانات والتشطيبات المقدمة من ${siteInfo.businessName}.`,
   )
 
@@ -40,7 +38,7 @@ export function ProjectsPage() {
         </Container>
       </section>
 
-      <section aria-label="قائمة مشروعات الدهانات" className="py-section">
+      <section aria-label="معرض صور أعمال الدهانات" className="py-section">
         <Container>
           {galleryImages.length > 0 ? (
             <>
@@ -51,8 +49,6 @@ export function ProjectsPage() {
               </div>
               <RealWorkGallery images={galleryImages} />
             </>
-          ) : projects.length > 0 ? (
-            <ProjectsGallery projects={projects} />
           ) : (
             <ProjectsEmptyState siteInfo={siteInfo} />
           )}
