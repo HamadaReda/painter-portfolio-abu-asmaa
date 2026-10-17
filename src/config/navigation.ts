@@ -7,6 +7,6 @@ export interface NavigationItem {
 export const publicNavigation: readonly NavigationItem[] = [
   { label: 'الرئيسية', href: '/' },
   { label: 'الخدمات', href: '/services' },
-  { label: 'المشروعات', href: '/#projects' },
+  { label: 'المشروعات', href: '/projects' },
   { label: 'تواصل معنا', href: '/#contact' },
 ]

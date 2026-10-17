@@ -5,6 +5,8 @@ import { HomePage, type HomePageData } from '../pages/HomePage'
 import { NotFoundPage } from '../pages/NotFoundPage'
 import { ServiceDetailPage, type ServiceDetailPageData } from '../pages/ServiceDetailPage'
 import { ServicesPage, type ServicesPageData } from '../pages/ServicesPage'
+import { ProjectsPage, type ProjectsPageData } from '../pages/ProjectsPage'
+import { ProjectDetailPage, type ProjectDetailPageData } from '../pages/ProjectDetailPage'
 import { PageLoading } from '../shared/ui'
 
 async function loadHomePage(): Promise<HomePageData> {
@@ -25,6 +27,48 @@ async function loadServicesPage(): Promise<ServicesPageData> {
   ])
 
   return { services, siteInfo }
+}
+
+async function loadProjectsPage(): Promise<ProjectsPageData> {
+  const [projects, siteInfo] = await Promise.all([
+    contentRepository.getProjects(),
+    contentRepository.getSiteInfo(),
+  ])
+
+  return { projects, siteInfo }
+}
+
+async function loadProjectDetail({
+  params,
+}: LoaderFunctionArgs): Promise<ProjectDetailPageData> {
+  const slug = params.slug
+
+  if (!slug) {
+    throw new Response('Not Found', { status: 404 })
+  }
+
+  const [project, projects, services, siteInfo] = await Promise.all([
+    contentRepository.getProjectBySlug(slug),
+    contentRepository.getProjects(),
+    contentRepository.getServices(),
+    contentRepository.getSiteInfo(),
+  ])
+
+  if (!project) {
+    throw new Response('Not Found', { status: 404 })
+  }
+
+  const relatedService = project.relatedServiceSlug
+    ? services.find((service) => service.slug === project.relatedServiceSlug) ?? null
+    : null
+  const relatedProjects = projects
+    .filter(
+      (candidate) =>
+        candidate.id !== project.id && candidate.category === project.category,
+    )
+    .slice(0, 3)
+
+  return { project, relatedProjects, relatedService, siteInfo }
 }
 
 async function loadServiceDetail({
@@ -73,6 +117,17 @@ export const router = createBrowserRouter([
         path: 'services/:slug',
         loader: loadServiceDetail,
         element: <ServiceDetailPage />,
+        errorElement: <NotFoundPage />,
+      },
+      {
+        path: 'projects',
+        loader: loadProjectsPage,
+        element: <ProjectsPage />,
+      },
+      {
+        path: 'projects/:slug',
+        loader: loadProjectDetail,
+        element: <ProjectDetailPage />,
         errorElement: <NotFoundPage />,
       },
       {
