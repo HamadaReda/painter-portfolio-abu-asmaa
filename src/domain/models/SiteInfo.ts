@@ -7,4 +7,6 @@ export interface SiteInfo {
     displayPhone: string
     whatsappUrl: string
   }
+  businessHours?: string
+  googleMapsUrl?: string
 }

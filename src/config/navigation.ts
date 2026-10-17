@@ -9,5 +9,5 @@ export const publicNavigation: readonly NavigationItem[] = [
   { label: 'الخدمات', href: '/services' },
   { label: 'المشروعات', href: '/projects' },
   { label: 'من نحن', href: '/about' },
-  { label: 'تواصل معنا', href: '/#contact' },
+  { label: 'تواصل معنا', href: '/contact' },
 ]
