@@ -1,4 +1,5 @@
 import type {
+  AboutPageContent,
   HomePageContent,
   Project,
   Service,
@@ -12,4 +13,5 @@ export interface ContentRepository {
   getServiceBySlug(slug: string): Promise<Service | null>
   getProjects(): Promise<readonly Project[]>
   getProjectBySlug(slug: string): Promise<Project | null>
+  getAboutPageContent(): Promise<AboutPageContent>
 }

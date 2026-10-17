@@ -1,4 +1,5 @@
 import {
+  aboutPageContent,
   homePageContent,
   projects,
   services,
@@ -30,4 +31,9 @@ export class StaticContentRepository implements ContentRepository {
   async getProjectBySlug(slug: string) {
     return projects.find((project) => project.slug === slug) ?? null
   }
+
+  async getAboutPageContent() {
+    return aboutPageContent
+  }
+
 }

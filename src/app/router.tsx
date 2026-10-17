@@ -8,6 +8,7 @@ import { ServicesPage, type ServicesPageData } from '../pages/ServicesPage'
 import { ProjectsPage, type ProjectsPageData } from '../pages/ProjectsPage'
 import { ProjectDetailPage, type ProjectDetailPageData } from '../pages/ProjectDetailPage'
 import { PageLoading } from '../shared/ui'
+import { AboutPage, type AboutPageData } from '../pages/AboutPage'
 
 async function loadHomePage(): Promise<HomePageData> {
   const [siteInfo, homePageContent, services, projects] = await Promise.all([
@@ -36,6 +37,16 @@ async function loadProjectsPage(): Promise<ProjectsPageData> {
   ])
 
   return { projects, siteInfo }
+}
+
+async function loadAboutPage(): Promise<AboutPageData> {
+  const [content, services, siteInfo] = await Promise.all([
+    contentRepository.getAboutPageContent(),
+    contentRepository.getServices(),
+    contentRepository.getSiteInfo(),
+  ])
+
+  return { content, services, siteInfo }
 }
 
 async function loadProjectDetail({
@@ -129,6 +140,11 @@ export const router = createBrowserRouter([
         loader: loadProjectDetail,
         element: <ProjectDetailPage />,
         errorElement: <NotFoundPage />,
+      },
+      {
+        path: 'about',
+        loader: loadAboutPage,
+        element: <AboutPage />,
       },
       {
         path: '*',
