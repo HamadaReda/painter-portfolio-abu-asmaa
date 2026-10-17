@@ -1,6 +1,6 @@
-import { Paintbrush } from 'lucide-react'
+import { Construction, MessageCircle, Phone } from 'lucide-react'
 import type { SiteInfo } from '../../../domain/models'
-import { StatusBadge } from '../../../shared/ui/StatusBadge'
+import { Badge, Button, Container } from '../../../shared/ui'
 
 interface HomeIntroProps {
   siteInfo: SiteInfo
@@ -8,33 +8,56 @@ interface HomeIntroProps {
 
 export function HomeIntro({ siteInfo }: HomeIntroProps) {
   return (
-    <section
-      aria-labelledby="home-title"
-      className="mx-auto flex w-full max-w-3xl flex-col items-start justify-center px-5 py-16 sm:px-8 sm:py-24"
-    >
-      <div className="mb-6 grid size-14 place-items-center rounded-2xl bg-blue-600 text-white shadow-sm">
-        <Paintbrush aria-hidden="true" className="size-7" />
-      </div>
+    <section aria-labelledby="home-title" className="relative isolate w-full overflow-hidden">
+      <div
+        aria-hidden="true"
+        className="absolute -start-32 top-16 -z-10 size-80 rounded-full bg-bronze-300/20 blur-3xl"
+      />
+      <div
+        aria-hidden="true"
+        className="absolute -end-40 bottom-0 -z-10 size-96 rounded-full bg-white/70 blur-3xl"
+      />
 
-      <StatusBadge>الموقع قيد التطوير</StatusBadge>
+      <Container className="flex min-h-[36rem] items-center py-section">
+        <div className="max-w-3xl">
+          <Badge
+            icon={<Construction aria-hidden="true" className="size-3.5" />}
+          >
+            الموقع قيد التطوير
+          </Badge>
 
-      <h1 id="home-title" className="mt-6 text-3xl font-bold leading-tight sm:text-5xl">
-        {siteInfo.businessName}
-      </h1>
+          <h1
+            className="mt-7 text-4xl font-bold leading-[1.35] text-charcoal-900 sm:text-5xl lg:text-6xl"
+            id="home-title"
+          >
+            {siteInfo.businessName}
+          </h1>
 
-      <p className="mt-4 max-w-2xl text-lg leading-8 text-slate-600">
-        {siteInfo.description}
-      </p>
+          <p className="mt-5 max-w-2xl text-lg leading-9 text-charcoal-700 sm:text-xl">
+            {siteInfo.description}
+          </p>
 
-      <address className="mt-8 not-italic">
-        <a
-          className="font-semibold text-blue-700 underline decoration-blue-300 underline-offset-4 transition hover:text-blue-900 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-blue-700"
-          href={`tel:${siteInfo.contact.phone}`}
-          dir="ltr"
-        >
-          {siteInfo.contact.displayPhone}
-        </a>
-      </address>
+          <div className="mt-9 flex flex-col gap-3 sm:flex-row">
+            <Button
+              href={siteInfo.contact.whatsappUrl}
+              leadingIcon={<MessageCircle aria-hidden="true" className="size-5" />}
+              rel="noreferrer"
+              size="lg"
+              target="_blank"
+            >
+              تواصل عبر واتساب
+            </Button>
+            <Button
+              href={`tel:${siteInfo.contact.phone}`}
+              leadingIcon={<Phone aria-hidden="true" className="size-5" />}
+              size="lg"
+              variant="secondary"
+            >
+              <span dir="ltr">{siteInfo.contact.displayPhone}</span>
+            </Button>
+          </div>
+        </div>
+      </Container>
     </section>
   )
 }

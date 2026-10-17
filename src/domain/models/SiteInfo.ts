@@ -5,5 +5,6 @@ export interface SiteInfo {
   contact: {
     phone: string
     displayPhone: string
+    whatsappUrl: string
   }
 }

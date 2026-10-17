@@ -1,24 +1,24 @@
 import { Outlet } from 'react-router-dom'
-import { siteConfig } from '../../config/site'
+import { Footer } from './Footer'
+import { Header } from './Header'
 
 export function PublicLayout() {
   return (
-    <div className="flex min-h-dvh flex-col bg-slate-50 text-slate-900">
-      <header className="border-b border-slate-200 bg-white">
-        <div className="mx-auto flex w-full max-w-5xl items-center px-5 py-4 sm:px-8">
-          <span className="font-semibold">{siteConfig.businessName}</span>
-        </div>
-      </header>
+    <div className="flex min-h-dvh flex-col bg-background text-charcoal-900">
+      <a
+        className="fixed start-4 top-4 z-50 -translate-y-24 rounded-brand-sm bg-charcoal-900 px-4 py-2 text-sm font-semibold text-white transition focus:translate-y-0 focus:outline-2 focus:outline-offset-4 focus:outline-bronze-500"
+        href="#main-content"
+      >
+        انتقل إلى المحتوى
+      </a>
 
-      <main className="flex flex-1">
+      <Header />
+
+      <main className="flex flex-1" id="main-content" tabIndex={-1}>
         <Outlet />
       </main>
 
-      <footer className="border-t border-slate-200 bg-white">
-        <div className="mx-auto w-full max-w-5xl px-5 py-4 text-sm text-slate-600 sm:px-8">
-          خدمات دهانات في {siteConfig.city}
-        </div>
-      </footer>
+      <Footer />
     </div>
   )
 }
