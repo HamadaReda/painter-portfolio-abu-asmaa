@@ -39,12 +39,16 @@ export function HomeHero({ content, siteInfo }: HomeHeroProps) {
               تواصل عبر واتساب
             </Button>
             <Button
+              aria-label={`اتصل الآن على الرقم ${siteInfo.contact.displayPhone}`}
               href={`tel:${siteInfo.contact.phone}`}
               leadingIcon={<Phone aria-hidden="true" className="size-5" />}
               size="lg"
               variant="secondary"
             >
-              اتصل الآن
+              <span className="inline-flex flex-wrap items-center justify-center gap-x-2">
+                <span>اتصل الآن</span>
+                <span dir="ltr">{siteInfo.contact.displayPhone}</span>
+              </span>
             </Button>
           </div>
         </div>

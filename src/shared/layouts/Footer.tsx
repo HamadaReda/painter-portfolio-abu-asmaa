@@ -2,7 +2,8 @@ import { MessageCircle, PaintRoller, Phone } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { publicNavigation } from '../../config/navigation'
 import { siteConfig } from '../../config/site'
-import { Container } from '../ui'
+import { developerCredit } from '../../config/developer'
+import { Container, WhatsAppIcon } from '../ui'
 
 const footerLinkClassName =
   'rounded-sm text-sm text-ivory-200 transition hover:text-bronze-300 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-bronze-300'
@@ -72,8 +73,22 @@ export function Footer() {
       </Container>
 
       <div className="border-t border-white/10">
-        <Container className="py-5 text-center text-xs text-ivory-200 md:text-start">
-          © {currentYear} {siteConfig.businessName}. جميع الحقوق محفوظة.
+        <Container className="flex flex-col items-center justify-between gap-3 px-page pb-24 pt-5 text-center text-xs text-ivory-200 sm:pb-5 md:flex-row md:text-start">
+          <p>© {currentYear} {siteConfig.businessName}. جميع الحقوق محفوظة.</p>
+          <p className="flex flex-col items-center justify-center gap-1.5 sm:flex-row">
+            <span>تم تصميم الموقع من خلال</span>
+            <a
+              aria-label={`تواصل عبر واتساب مع مصمم الموقع ${developerCredit.name} على الرقم ${developerCredit.whatsappNumber}`}
+              className="inline-flex flex-wrap items-center justify-center gap-1.5 rounded-sm font-semibold text-bronze-300 transition hover:text-white hover:underline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-bronze-300"
+              href={developerCredit.whatsappUrl}
+              rel="noreferrer"
+              target="_blank"
+            >
+              <span>{developerCredit.name}</span>
+              <WhatsAppIcon className="size-3.5" />
+              <span dir="ltr">{developerCredit.whatsappNumber}</span>
+            </a>
+          </p>
         </Container>
       </div>
     </footer>

@@ -4,6 +4,7 @@ import type {
   Project,
   Service,
   SiteInfo,
+  WorkGalleryImage,
 } from '../../domain/models'
 
 export interface ContentRepository {
@@ -14,4 +15,5 @@ export interface ContentRepository {
   getProjects(): Promise<readonly Project[]>
   getProjectBySlug(slug: string): Promise<Project | null>
   getAboutPageContent(): Promise<AboutPageContent>
+  getWorkGalleryImages(): Promise<readonly WorkGalleryImage[]>
 }

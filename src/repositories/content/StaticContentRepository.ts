@@ -4,6 +4,7 @@ import {
   projects,
   services,
   siteInfo,
+  workGalleryImages,
 } from '../../content/siteContent'
 import type { ContentRepository } from './ContentRepository'
 
@@ -34,6 +35,10 @@ export class StaticContentRepository implements ContentRepository {
 
   async getAboutPageContent() {
     return aboutPageContent
+  }
+
+  async getWorkGalleryImages() {
+    return workGalleryImages
   }
 
 }
